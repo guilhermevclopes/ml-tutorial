@@ -10,10 +10,6 @@ import pathlib
 
 from keras_preprocessing.image import ImageDataGenerator
 
-os.environ['KAGGLE_USERNAME'] = 'guilhermevclopes'
-os.environ['KAGGLE_KEY'] = '3d99ad12a0d97b25144cef4e99e825d4'
-
-!kaggle competitions download -c dogs-vs-cats
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if len(gpus):
@@ -21,7 +17,7 @@ if len(gpus):
 
 
 def create_folder_structure():
-    shutil.rmtree('./train')
+    # shutil.rmtree('./train')
     pathlib.Path("./train/train/dogs").mkdir(parents=True, exist_ok=True)
     pathlib.Path("./train/train/cats").mkdir(parents=True, exist_ok=True)
     pathlib.Path("./train/validate/dogs").mkdir(parents=True, exist_ok=True)
@@ -151,10 +147,13 @@ def load_and_predict():
 
     return predictions
 
-
+print("creating datasets")
 create_training_and_validation_set(0.8)
+print("training the model")
 result_history = train_model()
+print("plot")
 plot_result(result_history)
+print("predictions")
 predictions = load_and_predict()
 df = pd.DataFrame(data=predictions, index=range(1, 12501), columns=['id', 'label'])
 df = df.set_index(['id'])
