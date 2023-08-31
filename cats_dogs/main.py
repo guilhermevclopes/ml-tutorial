@@ -10,6 +10,11 @@ import pathlib
 
 from keras_preprocessing.image import ImageDataGenerator
 
+os.environ['KAGGLE_USERNAME'] = 'guilhermevclopes'
+os.environ['KAGGLE_KEY'] = '3d99ad12a0d97b25144cef4e99e825d4'
+
+!kaggle competitions download -c dogs-vs-cats
+
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if len(gpus):
     tf.config.experimental.set_memory_growth(gpus[0], True)
