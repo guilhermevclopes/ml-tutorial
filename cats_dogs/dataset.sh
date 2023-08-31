@@ -1,0 +1,1 @@
+cd cats_dogs && kaggle competitions download -c dogs-vs-cats
